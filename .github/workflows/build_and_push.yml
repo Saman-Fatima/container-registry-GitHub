@@ -22,7 +22,7 @@ jobs:
         uses: crazy-max/ghaction-docker-meta@v1
         with:
           images: ghcr.io/Saman-Fatima/yocto-runner
-          tag-raw: true
+          tags: type=semver,pattern={{version}}
           tag-edge: false
           tag-latest: true
           
