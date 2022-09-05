@@ -1,0 +1,18 @@
+name: On Push
+on: push
+
+env:
+    CONTAINER: "docker.github.vaillant-group.com/neext/plsw-linux-tools-yocto-build-container/plsw-linux-tools-yocto-build-container:latest"
+
+jobs:
+  call-submodule-check:
+    uses: NEEXT/plsw-linux-tools-shared-workflows/.github/workflows/shared-submodule-check.yml@feature/change-on-pr-workflow
+    secrets:
+      machine-user: ${{ secrets.MACHINE_USER_NAME}}
+      machine-user-token: ${{ secrets.MACHINE_USER_ACCESS_TOKEN }}
+    with:
+      container: $CONTAINER
+  
+  call-build-and-push:
+    uses: ./.github/workflows/build_and_push.yml
+
