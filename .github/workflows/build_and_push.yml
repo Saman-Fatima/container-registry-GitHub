@@ -22,7 +22,7 @@ jobs:
         uses: crazy-max/ghaction-docker-meta@v1
         with:
           images: ghcr.io/Saman-Fatima/yocto-runner
-          tag-sha: true
+          tag-raw: true
           tag-edge: false
           tag-latest: true
           
@@ -44,15 +44,7 @@ jobs:
         with:
           tags: ${{ steps.docker_meta.outputs.tags }} # tags are coming from docker-meta job
           file: ./Dockerfile
-          
-      # - name: Monitor image for vulnerabilities with Snyk
-      #   uses: snyk/actions/docker@master
-      #   env:
-      #     SNYK_TOKEN: ${{ secrets.SNYK }}
-      #   with:
-      #     command: monitor
-      #     image: "ghcr.io/gbaeke/rgapi:main"
-      #     args: --file=Dockerfile --project-name=rgapi 
+        
           
       - name: Push image
         uses: docker/build-push-action@v2
