@@ -75,5 +75,6 @@ else
 fi
 echo mypasswd | sudo -S chown nonroot /home/nonroot/
 echo mypasswd | sudo -S chown -R nonroot /home/nonroot/.ssh
+echo mypasswd | sudo -S chown -R nonroot /opt/
 
 exec "$@"
