@@ -22,7 +22,7 @@ jobs:
         uses: crazy-max/ghaction-docker-meta@v1
         with:
           images: ghcr.io/Saman-Fatima/yocto-runner
-          tag-sha: true
+#           tag-sha: true
           tag-edge: false
           tag-latest: true
           
@@ -39,27 +39,20 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GHCR_PASSWORD }}
           
-      - name: Build and push Docker image
-        shell: bash
-        run: |
-          while read tag 
-          do 
-            docker build . -t $tag
-            docker push $tag
-          done <<< $(echo "${{ steps.meta.outputs.tags }}")
+      
           
-#       - name: Build image
-#         uses: docker/build-push-action@v2
-#         with:
-#           tags: ${{ steps.docker_meta.outputs.tags }} # tags are coming from docker-meta job
-#           file: ./Dockerfile
+      - name: Build image
+        uses: docker/build-push-action@v2
+        with:
+          tags: ${{ steps.docker_meta.outputs.tags }} # tags are coming from docker-meta job
+          file: ./Dockerfile
         
           
-#       - name: Push image
-#         uses: docker/build-push-action@v2
-#         with:
-#           push: true
-#           tags: ${{ steps.docker_meta.outputs.tags }}
-#           file: ./Dockerfile
+      - name: Push image
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ steps.docker_meta.outputs.tags }}
+          file: ./Dockerfile
 
         
