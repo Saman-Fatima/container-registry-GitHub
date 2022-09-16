@@ -49,4 +49,4 @@ jobs:
           
           
       - name: push
-        run: docker push ghcr.io/Saman-Fatima/yocto-runner:latest
+        run: docker push ghcr.io/saman-fatima/yocto-runner:latest
