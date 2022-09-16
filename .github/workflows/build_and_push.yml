@@ -21,7 +21,7 @@ jobs:
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
         with:
-          images: ghcr.io/Saman-Fatima/yocto-runner
+          images: ghcr.io/saman/yocto-runner1
           tag-sha: true
           tag-edge: false
           tag-latest: true
@@ -49,4 +49,4 @@ jobs:
           
           
       - name: push
-        run: docker push ghcr.io/saman-fatima/yocto-runner:latest
+        run: docker push ghcr.io/saman/yocto-runner1:latest
