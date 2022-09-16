@@ -1,44 +1,23 @@
 name: Publish Docker Image
 
-on:
-  push:
-    branches: [ main ]
-  release:
-    types:
-      - published
+on: workflow_dispatch
         
 jobs:
-
-  build:
-    if: "!contains(github.event.head_commit.message, 'skip ci')"  #if the commit msg says to skip CI
+  build-container:
     runs-on: ubuntu-latest
-    
     steps:
       - name: Check out
         uses: actions/checkout@v2
         
-#       - name: Docker meta
-#         id: docker_meta
-#         uses: crazy-max/ghaction-docker-meta@v1
-#         with:
-#           images: ghcr.io/saman/yocto-runner1
-#           tag-sha: true
-#           tag-edge: false
-#           tag-latest: true
-      - name: Generate Docker metadata
+      - name: Docker meta
         id: docker_meta
-        uses: docker/metadata-action@v3
+        uses: crazy-max/ghaction-docker-meta@v1
         with:
-          images: |
-            docker.io/${{ github.repository }}
-            ghcr.io/${{ github.repository }}
-            quay.io/${{ github.repository }}
-          tags: |
-            type=ref,event=branch
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-#           flavor: |
-#             latest=true    
+          images: ghcr.io/Saman-Fatima/yocto-runner
+          tag-custom: latest
+          tag-semver: |
+            {{raw}}
+          
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
 
@@ -52,14 +31,10 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GHCR_PASSWORD }}
           
-#       - name: Build image
-#         uses: docker/build-push-action@v2
-#         with:
-#           context: .
-#           push: true
-#           tags:  ${{ steps.docker_meta.outputs.tags }}
-#           file: ./Dockerfile
-          
       - name: Build image
-        run: docker build -t latest . && docker push --all-tags
-          
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags:  ${{ steps.docker_meta.outputs.tags }}
+          file: ./Dockerfile
