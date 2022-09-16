@@ -61,5 +61,5 @@ jobs:
 #           file: ./Dockerfile
           
       - name: Build image
-        run: docker build -t latest . && docker push -a
+        run: docker build -t latest . && docker push --all-tags
           
