@@ -96,7 +96,7 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en     
 
 # create non-root user for yocto-build
-RUN useradd -u 1022 -g users -d /home/nonroot -s /bin/bash nonroot
+RUN useradd -u 1022 -g users -d /home/nonroot -s /bin/bash -p $(echo mypasswd | openssl passwd -1 -stdin) nonroot
 RUN usermod -aG sudo nonroot
 RUN chown nonroot /home/runner/
 # RUN chown nonroot /home/nonroot/
