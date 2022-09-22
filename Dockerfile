@@ -45,11 +45,11 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
         gettext \
         liblttng-ust0 \
         libcurl4-openssl-dev \
-        openssh-client && \
         texinfo gcc-multilib socat cpio  xz-utils debianutils libsdl1.2-dev xterm autoconf libtool libglib2.0-dev \
         libarchive-dev sed cvs subversion coreutils texi2html docbook-utils python-pysqlite2 help2man make gcc g++ \
         desktop-file-utils libgl1-mesa-dev libglu1-mesa-dev mercurial automake groff curl lzop asciidoc u-boot-tools \
         dos2unix mtd-utils pv libncurses5 libncurses5-dev libncursesw5-dev libelf-dev zlib1g-dev bc rename \
+        openssh-client && \
     rm -rf /var/lib/apt/lists/* && \
     apt-get clean
 
