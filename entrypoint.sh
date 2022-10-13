@@ -69,6 +69,7 @@ else
         --url $RUNNER_URL \
         --token $RUNNER_TOKEN \
         --name $RUNNER_NAME \
+	--disableupdate \
         --work $RUNNER_WORK_DIRECTORY \
         $CONFIG_OPTS \
         --unattended
